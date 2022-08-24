@@ -1,0 +1,98 @@
+.acc-ct{
+    background-color: #a9c4cc;
+    width: 100%;
+    height: 100%;
+}
+.head-txt{
+    background-color: #941818;
+    color: #fff;
+}
+legend{
+    color: purple;
+    font-size: 13px;
+    
+}
+
+label{
+    color: #3f1533;
+   font-size: 14px;
+}
+.rate{
+    color: #952676;
+
+}
+
+/* .inpt_box:focus{
+    background-color: black;
+    outline: none;
+    border: none;
+} */
+
+.gtsin_btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray;
+}
+.txt2{
+    color: #952676;
+    font-size: 13px;
+}
+.distance_btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray;
+}
+.genral_info_box{
+    border: 1px solid gray;
+   
+}
+form{
+    margin: 4px;
+}
+input:focus{
+    outline: none;
+    border: none;
+}
+.note-btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray;
+    font-size: 12px;
+    padding: 5px;
+}
+.Acc-btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray;
+    background-color: #ccc;
+    width: 55px;
+    font-size: 10px;
+    margin-top: -0px;
+    position: absolute;
+}
+
+/* other info--- */
+.other_info_box{
+    border: 1px solid gray;
+
+}
+.top-box{
+    margin-top: 200px;
+}
+.text-other{
+    color: gray;
+   
+}
+.other-lbl-txt{
+    font-size: 12px;
+}
+.save-btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray; 
+}
+.quit-btn{
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px gray; 
+}
