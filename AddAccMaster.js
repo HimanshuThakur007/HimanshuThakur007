@@ -3,16 +3,24 @@ import "./AddAccountMaster.css";
 import { useState } from "react";
 
 const AddAccountMaster = () => {
-  const [Name, setName] = useState("");
+ const [Name, setName] = useState("");
 
   const nameHandler = (e) => {
     e.preventDefault();
     setName(e.target.value);
   };
 
+  const handleEnter = (e) => {
+    if (e.key.toLowerCase() === 'enter'){
+        const form = e.target.form;
+        const index = [...form].indexOf(e.target);
+        form.elements[index + 1].focus();
+        e.preventDefault() 
+    }
+  }
+   
   return (
-    <>
-      <div className="container-fluid acc-ct ">
+    <div className="container-fluid acc-ct ">
         <div className="Heading-top d-flex justify-content-center pt-2 pb-2">
           <h5 className="head-txt px-4"> Add Account Master</h5>
         </div>
@@ -31,6 +39,7 @@ const AddAccountMaster = () => {
                     <div className="col-12 pt-0">
                       <label>Name</label>
                       <input
+                      onKeyDown={handleEnter}
                         value={Name}
                         onChange={nameHandler}
                         type="text"
@@ -41,16 +50,16 @@ const AddAccountMaster = () => {
                     </div>
                     <div className="col-12 pt-0">
                       <label>(Alias)</label>
-                      <input type="text" name="alias" id="name" />
+                      <input onKeyDown={handleEnter} type="text" name="alias" id="name" />
                       <br></br>
                     </div>
                     <div className="col-12 pt-0">
                       <label>Print Name</label>
-                      <input type="text" name="printName" id="name" />
+                      <input  onKeyDown={handleEnter} type="text" name="printName" id="name" />
                     </div>
                     <div className="col-12 pt-0">
                       <label>Group</label>
-                      <input type="text" name="GroupName" id="name" />
+                      <input onKeyDown={handleEnter} type="text" name="GroupName" id="name" />
                     </div>
 
                     <div className="col-12 pt-0">
@@ -60,6 +69,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 d-flex justify-content-center">
                           <input
+                            onKeyDown={handleEnter}
                             type="opBal"
                             name="OpBal"
                             id="opBal"
@@ -71,6 +81,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
+                           onKeyDown={handleEnter}
                             type="Dr"
                             name="Dr-Cr"
                             id="Dr"
@@ -83,6 +94,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 d-flex justify-content-center">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="PrevBal"
                             id="opBal"
@@ -94,6 +106,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="Dr-Cr"
                             id="Dr"
@@ -103,6 +116,7 @@ const AddAccountMaster = () => {
                         <div className="col-12 pt-0">
                           <label>Address</label>
                           <textarea
+                          onKeyDown={handleEnter}
                             type="Address"
                             name="Address"
                             id="Address"
@@ -120,6 +134,7 @@ const AddAccountMaster = () => {
                               </div>
                               <div className="col-6 d-flex justify-content-end">
                                 <input
+                                onKeyDown={handleEnter}
                                   type="text"
                                   name="country"
                                   id="country"
@@ -136,7 +151,7 @@ const AddAccountMaster = () => {
                                 </label>
                               </div>
                               <div className="col-6 d-flex justify-content-end">
-                                <input type="text" name="state" id="state" />
+                                <input onKeyDown={handleEnter} type="text" name="state" id="state" />
                               </div>
                             </div>
                           </div>
@@ -152,18 +167,18 @@ const AddAccountMaster = () => {
                             <label>Type Of Dealer</label>
                           </div>
                           <div className="col-3">
-                            <input type="text" name="dealer" id="dealer" />{" "}
+                            <input onKeyDown={handleEnter} type="text" name="dealer" id="dealer" />{" "}
                           </div>
                           <div className="col-6"></div>
                           <div className="col-3">
                             <label>GSTIN/UIN</label>
                           </div>
                           <div className="col-3 ">
-                            <input type="text" name="dealer" id="dealer" />
+                            <input onKeyDown={handleEnter} type="text" name="dealer" id="dealer" />
                           </div>
                           <div className="col-6">
                             <div className="d-flex justify-content-end ">
-                              <button className="gtsin_btn px-3">
+                              <button className="gtsin_btn px-3" onKeyDown={handleEnter}>
                                 <b>Validate GSTIN Online</b>
                               </button>
                             </div>
@@ -177,7 +192,7 @@ const AddAccountMaster = () => {
                             <label>Aadhar No.</label>
                           </div>
                           <div className="col-3">
-                            <input type="num" name="aadhar" id="aadhar" />
+                            <input onKeyDown={handleEnter} type="num" name="aadhar" id="aadhar" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center">
@@ -186,7 +201,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input type="num" name="tin" id="tin" />
+                              <input onKeyDown={handleEnter} type="num" name="tin" id="tin" />
                             </div>
                           </div>
 
@@ -194,7 +209,7 @@ const AddAccountMaster = () => {
                             <label>IT PAN</label>
                           </div>
                           <div className="col-3">
-                            <input type="num" name="pan" id="aadhar" />
+                            <input onKeyDown={handleEnter} type="num" name="pan" id="aadhar" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-3">
@@ -203,7 +218,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input type="text" name="ward" id="tin" />
+                              <input onKeyDown={handleEnter} type="text" name="ward" id="tin" />
                             </div>
                           </div>
 
@@ -211,14 +226,14 @@ const AddAccountMaster = () => {
                             <label>E-Mail</label>
                           </div>
                           <div className="col-9">
-                            <input type="email" name="email" id="email" />
+                            <input onKeyDown={handleEnter} type="email" name="email" id="email" />
                           </div>
 
                           <div className="col-3">
                             <label>Mobile No.</label>
                           </div>
                           <div className="col-3">
-                            <input type="num" name="mobile" id="mobile" />
+                            <input onKeyDown={handleEnter} type="num" name="mobile" id="mobile" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -227,7 +242,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input type="num" name="whatsaap" id="mobile" />
+                              <input onKeyDown={handleEnter} type="num" name="whatsaap" id="mobile" />
                             </div>
                           </div>
                           <div className="col-6"></div>
@@ -241,7 +256,7 @@ const AddAccountMaster = () => {
                             <label>Tel. No.</label>
                           </div>
                           <div className="col-3">
-                            <input type="num" name="tel" id="tel" />
+                            <input onKeyDown={handleEnter} type="num" name="tel" id="tel" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0 fax">
@@ -250,7 +265,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input type="text" name="fax" id="fax" />
+                              <input onKeyDown={handleEnter} type="text" name="fax" id="fax" />
                             </div>
                           </div>
 
@@ -259,7 +274,7 @@ const AddAccountMaster = () => {
                             <label>Contact Person</label>
                           </div>
                           <div className="col-3">
-                            <input type="num" name="Contact person" id="tel" />
+                            <input onKeyDown={handleEnter} type="num" name="Contact person" id="tel" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -268,7 +283,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input type="text" name="transport" id="fax" />
+                              <input onKeyDown={handleEnter} type="text" name="transport" id="fax" />
                             </div>
                           </div>
 
@@ -277,7 +292,7 @@ const AddAccountMaster = () => {
                             <label>Station</label>
                           </div>
                           <div className="col-3">
-                            <input type="text" name="station" id="tel" />
+                            <input onKeyDown={handleEnter} type="text" name="station" id="tel" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -286,7 +301,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input type="num" name="pin code" id="fax" />
+                              <input onKeyDown={handleEnter} type="num" name="pin code" id="fax" />
                             </div>
                           </div>
 
@@ -296,6 +311,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 d-flex justify-content-end">
                             <input
+                            onKeyDown={handleEnter}
                               type="num"
                               placeholder="0"
                               name="Distance"
@@ -304,7 +320,7 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-4">
                             <div>
-                              <button className="distance_btn">
+                              <button className="distance_btn" >
                                 <b>Check Distance</b>
                               </button>
                             </div>
@@ -354,6 +370,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-1">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             placeholder="N"
                             name="SDsale"
@@ -367,6 +384,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="Dsale"
                             id="defaultType"
@@ -378,6 +396,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-1">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             placeholder="N"
                             name="Sdpurc"
@@ -391,6 +410,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="Dpure"
                             id="defaultType"
@@ -402,6 +422,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-1">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="SDsale"
                             id="specifyType"
@@ -414,6 +435,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="Dsale"
                             id="defaultType"
@@ -427,6 +449,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="cst"
                             id="cst"
@@ -437,6 +460,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="lst"
                             id="lst"
@@ -465,6 +489,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-9">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="bankName"
                             id="Bank"
@@ -476,6 +501,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-9">
                           <input
+                          onKeyDown={handleEnter}
                             type="num"
                             name="bankAcc"
                             id="Bank"
@@ -487,6 +513,7 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-9">
                           <input
+                          onKeyDown={handleEnter}
                             type="text"
                             name="bankAcc"
                             id="Bank"
@@ -538,8 +565,9 @@ const AddAccountMaster = () => {
           </div>
         </div>
       </div>
-    </>
+
   );
 };
+
 
 export default AddAccountMaster;
