@@ -174,7 +174,9 @@ input#dealer {
 }
 .col-5 {
     --bs-gutter-x: 0;
-    width: 40.666667%;
+}
+.col-2 {
+    --bs-gutter-x: 0;
 }
 label.country {
     margin-left: 12px;
@@ -285,8 +287,8 @@ input#Bank {
     border: 0px;
 }
 textarea#extraInfo {
-    width: 179px;
-    height: 37.9rem;
+    width: 190px;
+    height: 37.6rem;
     background-color: unset;
     border: 0px;
     overflow: scroll;
@@ -295,6 +297,16 @@ textarea#extraInfo {
     --bs-gutter-x: 0.5rem;
 }
 
-button.px-4.ms-2.quit-btn {
-    margin-inline-end: 7px;
+button.ms-2.quit-btn {
+
+        margin-inline-end: 7px;
+        margin-top: auto;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+button.px-4.save-btn {
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: auto;
 }
