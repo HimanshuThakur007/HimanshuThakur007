@@ -1,26 +1,43 @@
-import React from "react";
+
+import React, { useState } from "react";
 import "./AddAccountMaster.css";
-import { useState } from "react";
 
 const AddAccountMaster = () => {
- const [Name, setName] = useState("");
-
-  const nameHandler = (e) => {
-    e.preventDefault();
-    setName(e.target.value);
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index + 1].focus();
+      e.preventDefault();
+    }
   };
 
-  const handleEnter = (e) => {
-    if (e.key.toLowerCase() === 'enter'){
-        const form = e.target.form;
-        const index = [...form].indexOf(e.target);
-        form.elements[index + 1].focus();
-        e.preventDefault() 
+  const keyupHandler = (e) => {
+    if (e.key === "keyup") {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index - 1].focus();
+      e.preventDefault();
     }
+  };
+
+  const handleInput=(e)=>{
+    e.preventDefault();
+    setUsername(e.target.value);
   }
-   
+  
+
+  const NumericOnly= (e) => { //angka only
+    const reg = /^[0-9\b]+$/
+    let preval=e.target.value
+    if (e.target.value === '' || reg.test(e.target.value)) return true
+    else e.target.value = preval.substring(0,(preval.length-1))
+}
+ const [username , setUsername] = useState('')
+
   return (
-    <div className="container-fluid acc-ct ">
+    <>
+      <div className="container-fluid acc-ct ">
         <div className="Heading-top d-flex justify-content-center pt-2 pb-2">
           <h5 className="head-txt px-4"> Add Account Master</h5>
         </div>
@@ -30,7 +47,7 @@ const AddAccountMaster = () => {
           <div className="col-5">
             {/* General Info Box...! */}
             <div className="genral_info_box mb-5 ps-0">
-              <form className="mb-4">
+              <form >
                 <fieldset className="border p-2">
                   <legend className="float-none w-auto p-2">
                     General Info.
@@ -39,9 +56,11 @@ const AddAccountMaster = () => {
                     <div className="col-12 pt-0">
                       <label>Name</label>
                       <input
-                      onKeyDown={handleEnter}
-                        value={Name}
-                        onChange={nameHandler}
+                        onKeyDown={handleEnter}
+                        onChange = {handleInput}
+                        value ={username}
+                         
+                        className = "textColor"
                         type="text"
                         name="name"
                         id="name"
@@ -50,16 +69,43 @@ const AddAccountMaster = () => {
                     </div>
                     <div className="col-12 pt-0">
                       <label>(Alias)</label>
-                      <input onKeyDown={handleEnter} type="text" name="alias" id="name" />
+                      <input 
+                      onKeyDown={handleEnter}
+                      onKeyUp = {keyupHandler}
+                      
+                      className = "textColor"
+                      type="text" 
+                      name="alias" 
+                      id="name" 
+                      />
                       <br></br>
                     </div>
                     <div className="col-12 pt-0">
                       <label>Print Name</label>
-                      <input  onKeyDown={handleEnter} type="text" name="printName" id="name" />
+                      <input
+                        onKeyDown={handleEnter}
+                        onKeyUp = {keyupHandler}
+                        className = "textColor"
+                        type="text"
+                        name="printName"
+                        id="printname"
+                      />
                     </div>
                     <div className="col-12 pt-0">
                       <label>Group</label>
-                      <input onKeyDown={handleEnter} type="text" name="GroupName" id="name" />
+                      {/* <input
+                        onKeyDown={handleEnter}
+                        className = "textColor"
+                        type="text"
+                        name="GroupName"
+                        id="name"
+                      /> */}
+                      <select class="form-select" aria-label="Default select example" onKeyDown={handleEnter}>
+                        <option className="textColor" selected>Cash</option>
+                       <option className="textColor" value="1">Cash</option>
+                             <option className="textColor" value="2">dash2</option>
+                             <option  className="textColor" value="3">Cash3</option>
+                             </select>
                     </div>
 
                     <div className="col-12 pt-0">
@@ -69,7 +115,9 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 d-flex justify-content-center">
                           <input
+                            
                             onKeyDown={handleEnter}
+                            className = "textColor"
                             type="opBal"
                             name="OpBal"
                             id="opBal"
@@ -81,7 +129,9 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
-                           onKeyDown={handleEnter}
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            maxLength={1}
                             type="Dr"
                             name="Dr-Cr"
                             id="Dr"
@@ -94,7 +144,8 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 d-flex justify-content-center">
                           <input
-                          onKeyDown={handleEnter}
+                            onKeyDown={handleEnter}
+                            className = "textColor"
                             type="text"
                             name="PrevBal"
                             id="opBal"
@@ -106,7 +157,9 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
-                          onKeyDown={handleEnter}
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            maxLength={1}
                             type="text"
                             name="Dr-Cr"
                             id="Dr"
@@ -116,7 +169,8 @@ const AddAccountMaster = () => {
                         <div className="col-12 pt-0">
                           <label>Address</label>
                           <textarea
-                          onKeyDown={handleEnter}
+                            onKeyDown={handleEnter}
+                            className = "textColor"
                             type="Address"
                             name="Address"
                             id="Address"
@@ -129,12 +183,12 @@ const AddAccountMaster = () => {
                           <div className="col-5">
                             <div className="row">
                               <div className="col-6">
-                                {" "}
                                 <label className="country">Country</label>
                               </div>
                               <div className="col-6 d-flex justify-content-end">
                                 <input
-                                onKeyDown={handleEnter}
+                                  onKeyDown={handleEnter}
+                                  className = "textColor"
                                   type="text"
                                   name="country"
                                   id="country"
@@ -145,13 +199,17 @@ const AddAccountMaster = () => {
                           <div className="col-4">
                             <div className="row">
                               <div className="col-6">
-                                {" "}
                                 <label className="d-flex justify-content-end">
                                   State/POS
                                 </label>
                               </div>
                               <div className="col-6 d-flex justify-content-end">
-                                <input onKeyDown={handleEnter} type="text" name="state" id="state" />
+                                <input 
+                                  onKeyDown={handleEnter} 
+                                  className = "textColor"
+                                  type="text" 
+                                  name="state" 
+                                  id="state" />
                               </div>
                             </div>
                           </div>
@@ -167,14 +225,26 @@ const AddAccountMaster = () => {
                             <label>Type Of Dealer</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="text" name="dealer" id="dealer" />{" "}
+                            <input 
+                            onKeyDown={handleEnter} 
+                            className = "textColor"
+                            type="text" 
+                            name="dealer" 
+                            id="dealer" 
+                            />
                           </div>
                           <div className="col-6"></div>
                           <div className="col-3">
                             <label>GSTIN/UIN</label>
                           </div>
                           <div className="col-3 ">
-                            <input onKeyDown={handleEnter} type="text" name="dealer" id="dealer" />
+                            <input
+                            onKeyDown={handleEnter} 
+                            className = "textColor"
+                            type="text" 
+                            name="dealer" 
+                            id="dealer" 
+                            />
                           </div>
                           <div className="col-6">
                             <div className="d-flex justify-content-end ">
@@ -192,7 +262,13 @@ const AddAccountMaster = () => {
                             <label>Aadhar No.</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="num" name="aadhar" id="aadhar" />
+                            <input
+                            onKeyDown={handleEnter} 
+                            className = "textColor"
+                            type="num" 
+                            name="aadhar" 
+                            id="aadhar" 
+                            />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center">
@@ -201,7 +277,13 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="num" name="tin" id="tin" />
+                              <input 
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              type="num" 
+                              name="tin" 
+                              id="tin" 
+                              />
                             </div>
                           </div>
 
@@ -209,7 +291,13 @@ const AddAccountMaster = () => {
                             <label>IT PAN</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="num" name="pan" id="aadhar" />
+                            <input 
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            type="num" 
+                            name="pan" 
+                            id="aadhar" 
+                            />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-3">
@@ -218,7 +306,13 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="text" name="ward" id="tin" />
+                              <input 
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              type="text" 
+                              name="ward" 
+                              id="tin" 
+                              />
                             </div>
                           </div>
 
@@ -226,14 +320,28 @@ const AddAccountMaster = () => {
                             <label>E-Mail</label>
                           </div>
                           <div className="col-9">
-                            <input onKeyDown={handleEnter} type="email" name="email" id="email" />
+                            <input 
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            />
                           </div>
 
                           <div className="col-3">
                             <label>Mobile No.</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="num" name="mobile" id="mobile" />
+                            <input 
+                            onChange={NumericOnly}
+                            onKeyDown={handleEnter}
+                            maxLength={10}
+                            className = "textColor"
+                            type="num" 
+                            name="mobile" 
+                            id="mobile" 
+                            />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -242,7 +350,15 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3 ">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="num" name="whatsaap" id="mobile" />
+                              <input 
+                              onChange={NumericOnly}
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              maxLength={10}
+                              type="num" 
+                              name="whatsaap" 
+                              id="mobile" 
+                              />
                             </div>
                           </div>
                           <div className="col-6"></div>
@@ -252,11 +368,16 @@ const AddAccountMaster = () => {
                             </p>
                           </div>
                           <div className="col-3">
-                            {" "}
                             <label>Tel. No.</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="num" name="tel" id="tel" />
+                            <input 
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            type="num" 
+                            name="tel" 
+                            id="tel"
+                            />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0 fax">
@@ -265,16 +386,26 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="text" name="fax" id="fax" />
+                              <input 
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              type="text" 
+                              name="fax" 
+                              id="fax" 
+                              />
                             </div>
                           </div>
 
                           <div className="col-3">
-                            {" "}
                             <label>Contact Person</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="num" name="Contact person" id="tel" />
+                            <input 
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            type="num" 
+                            name="Contact person" 
+                            id="tel" />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -283,16 +414,27 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="text" name="transport" id="fax" />
+                              <input 
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              type="text" 
+                              name="transport" 
+                              id="fax" 
+                              />
                             </div>
                           </div>
 
                           <div className="col-3">
-                            {" "}
                             <label>Station</label>
                           </div>
                           <div className="col-3">
-                            <input onKeyDown={handleEnter} type="text" name="station" id="tel" />
+                            <input 
+                            onKeyDown={handleEnter}
+                            className = "textColor"
+                            type="text" 
+                            name="station" 
+                            id="tel" 
+                            />
                           </div>
                           <div className="col-3">
                             <label className="d-flex justify-content-center ps-0">
@@ -301,17 +443,25 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-3">
                             <div className="d-flex justify-content-end">
-                              <input onKeyDown={handleEnter} type="num" name="pin code" id="fax" />
+                              <input 
+                              onChange={NumericOnly}
+                              onKeyDown={handleEnter}
+                              className = "textColor"
+                              type="num" 
+                              name="pin code" 
+                              id="fax" 
+                              />
                             </div>
                           </div>
 
                           <div className="col-1">
-                            {" "}
                             <label>Distance</label>
                           </div>
                           <div className="col-3 d-flex justify-content-end">
                             <input
-                            onKeyDown={handleEnter}
+                            onChange={NumericOnly}
+                              onKeyDown={handleEnter}
+                              className = "textColor"
                               type="num"
                               placeholder="0"
                               name="Distance"
@@ -320,12 +470,12 @@ const AddAccountMaster = () => {
                           </div>
                           <div className="col-4">
                             <div>
-                              <button className="distance_btn" >
+                              <button className="distance_btn" onKeyDown={handleEnter}>
                                 <b>Check Distance</b>
                               </button>
                             </div>
                           </div>
-                          <div className="col-4"></div>
+                          
                         </div>
                       </div>
                     </div>
@@ -334,8 +484,8 @@ const AddAccountMaster = () => {
               </form>
             </div>
             {/* General Info Box End..! */}
-           
-            <div className="row">
+
+            {/* <div className="row">
               <div className="col-12">
                 <button className="note-btn px-3 mx-1">
                   <b>Notes</b>
@@ -350,14 +500,14 @@ const AddAccountMaster = () => {
                   <b>Acc IMAGE</b>
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* col-5 end..! */}
 
           <div className="col-5 ">
             {/* Other Info Box start..! */}
             <div className="other_info_box mb-5 ps-0">
-              <form>
+              <form >
                 <fieldset className="border p-2">
                   <legend legend className="float-none w-auto p-2">
                     Other Info.
@@ -370,7 +520,9 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-1">
                           <input
-                          onKeyDown={handleEnter}
+                            onKeyDown={handleEnter}
+                            maxLength={1}
+                            className = "textColor"
                             type="text"
                             placeholder="N"
                             name="SDsale"
@@ -383,11 +535,13 @@ const AddAccountMaster = () => {
                           </label>
                         </div>
                         <div className="col-3">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="Dsale"
-                            id="defaultType"
+                          maxLength={1}
+                          type="text" 
+                          className = "textColor"
+                          name="Dsale" 
+                          id="defaultType" 
                           />
                         </div>
 
@@ -397,6 +551,8 @@ const AddAccountMaster = () => {
                         <div className="col-1">
                           <input
                           onKeyDown={handleEnter}
+                          maxLength={1}
+                           className = "textColor"
                             type="text"
                             placeholder="N"
                             name="Sdpurc"
@@ -409,11 +565,13 @@ const AddAccountMaster = () => {
                           </label>
                         </div>
                         <div className="col-3">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="Dpure"
-                            id="defaultType"
+                          maxLength={1}
+                          className = "textColor"
+                          type="text" 
+                          name="Dpure" 
+                          id="defaultType" 
                           />
                         </div>
 
@@ -421,11 +579,13 @@ const AddAccountMaster = () => {
                           <label className="text-other">Freeze Sale Type</label>
                         </div>
                         <div className="col-1">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="SDsale"
-                            id="specifyType"
+                          maxLength={1}
+                          className = "textColor"
+                          type="text" 
+                          name="SDsale" 
+                          id="specifyType" 
                           />
                         </div>
                         <div className="col-4">
@@ -434,12 +594,14 @@ const AddAccountMaster = () => {
                           </label>
                         </div>
                         <div className="col-3">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="Dsale"
-                            id="defaultType"
-                            />
+                          maxLength={1}
+                          className = "textColor"
+                          type="text" 
+                          name="Dsale" 
+                          id="defaultType" 
+                          />
                         </div>
                       </div>
 
@@ -448,23 +610,25 @@ const AddAccountMaster = () => {
                           <label>CST No.</label>
                         </div>
                         <div className="col-3">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="cst"
-                            id="cst"
+                          className = "textColor"
+                          type="text" 
+                          name="cst" 
+                          id="cst" 
                           />
                         </div>
                         <div className="col-3">
                           <label>LST No.</label>
                         </div>
                         <div className="col-3">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="lst"
-                            id="lst"
-                            />
+                          className = "textColor"
+                          type="text" 
+                          name="lst" 
+                          id="lst" 
+                          />
                         </div>
 
                         <div className="col-3">
@@ -478,7 +642,6 @@ const AddAccountMaster = () => {
                             LBT No.
                           </label>
                         </div>
-                        
                       </div>
                     </div>
 
@@ -488,36 +651,37 @@ const AddAccountMaster = () => {
                           <label>Bank Name</label>
                         </div>
                         <div className="col-9">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="bankName"
-                            id="Bank"
-                            />
+                          className = "textColor"
+                          type="text" 
+                          name="bankName" 
+                          id="Bank" 
+                          />
                         </div>
 
                         <div className="col-3">
                           <label>Bank Acc No.</label>
                         </div>
                         <div className="col-9">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="num"
-                            name="bankAcc"
-                            id="Bank"
-                            />
+                          className = "textColor"
+                          type="num" 
+                          name="bankAcc" 
+                          id="Bank" />
                         </div>
 
                         <div className="col-3">
                           <label>IFSC Code</label>
                         </div>
                         <div className="col-9">
-                          <input
+                          <input 
                           onKeyDown={handleEnter}
-                            type="text"
-                            name="bankAcc"
-                            id="Bank"
-                            />
+                          className = "textColor"
+                          type="text" 
+                          name="bankAcc" 
+                          id="Bank" />
                         </div>
                       </div>
                     </div>
@@ -557,17 +721,18 @@ const AddAccountMaster = () => {
             <div className="info_box">
               <form>
                 <fieldset className="border p-2 extra">
-                  <legend legend className="float-none w-auto p-2">Extra Info.</legend>
-                  <textarea type="text" name = "ExtraInfo" id="extraInfo"/>
+                  <legend legend className="float-none w-auto p-2">
+                    Extra Info.
+                  </legend>
+                  <textarea type="text" name="ExtraInfo" id="extraInfo" />
                 </fieldset>
               </form>
             </div>
           </div>
         </div>
       </div>
-
+    </>
   );
 };
-
 
 export default AddAccountMaster;
