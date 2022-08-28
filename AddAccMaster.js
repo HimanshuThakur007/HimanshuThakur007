@@ -20,6 +20,17 @@ const AddAccountMaster = () => {
       e.preventDefault();
     }
   };
+  
+  const handleChange = (e) => {
+    const result = e.target.value.replace(/[^c-d]/gi, '');
+    setDrInput(result);
+  }
+
+  const crInputChange = (e) => {
+    const result = e.target.value.replace(/[^c-d]/gi, '');
+    setCrInput(result);
+  }
+
 
   const handleInput=(e)=>{
     e.preventDefault();
@@ -34,6 +45,8 @@ const AddAccountMaster = () => {
     else e.target.value = preval.substring(0,(preval.length-1))
 }
  const [username , setUsername] = useState('')
+ const [drInput, setDrInput] = useState('D')
+ const [crInput, setCrInput] = useState ('D')
 
   return (
     <>
@@ -129,6 +142,8 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
+                               value={drInput}
+                            onChange ={handleChange}
                             onKeyDown={handleEnter}
                             className = "textColor"
                             maxLength={1}
@@ -157,6 +172,8 @@ const AddAccountMaster = () => {
                         </div>
                         <div className="col-3 ">
                           <input
+                            value={crInput}
+                            onChange = {crInputChange}
                             onKeyDown={handleEnter}
                             className = "textColor"
                             maxLength={1}
