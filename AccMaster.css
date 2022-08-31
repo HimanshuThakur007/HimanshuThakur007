@@ -245,6 +245,19 @@ input#specifyType {
     border: 0px;
 }
 
+input#specifyType1 {
+    width: 31px;
+    height: 22px;
+    margin-left: 0px;
+    border: 0px;
+}
+input#specifyType2 {
+    width: 31px;
+    height: 22px;
+    margin-left: 0px;
+    border: 0px;
+}
+
 input#defaultType {
     width: 31px;
     height: 22px;
@@ -337,7 +350,7 @@ select.form-select {
     /* height: 22px; */
     margin-right: 2px;
     float: right;
-    width: 361px;
+    width: 362px;
     height: 22px;
     border: 0px;
     padding: 0px;
